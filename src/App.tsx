@@ -1,26 +1,26 @@
-import { useState } from "react"; // Убрали useEffect, так как запрос будет по кнопке
+import { useState } from "react"; 
 import Header from "./components/Header";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
 function App() {
-  const [cityInput, setCityInput] = useState(""); // Состояние для поля ввода города
-  const [data, setData] = useState<any>(null); // Используем any или создаем интерфейс для data
-  const [loading, setLoading] = useState(false); // Изначально не загружаем
+  const [cityInput, setCityInput] = useState(""); 
+  const [data, setData] = useState<any>(null); 
+  const [loading, setLoading] = useState(false); 
   const [error, setError] = useState<string | null>(null);
 
   // Функция для запроса погоды
   const fetchWeather = () => {
-    if (!cityInput.trim()) {
-      setError("Пожалуйста, введите название города.");
-      setData(null); // Очищаем предыдущие данные
-      return;
-    }
+    //if (!cityInput.trim()) {
+      //setError("Пожалуйста, введите название города.");
+      //setData(null); // Очищаем предыдущие данные
+      //return;
+    //}
     setLoading(true);
     setError(null);
-    setData(null); // Очищаем предыдущие данные перед новым запросом
+    setData(null); 
 
-    fetch(`/api/weather?city=${encodeURIComponent(cityInput)}`) // Добавляем город как query parameter
+    fetch(`/api/weather?city=${encodeURIComponent(cityInput)}`) 
       .then((response) => {
         if (!response.ok) {
           // сообщение об ошибке от API
@@ -58,10 +58,6 @@ function App() {
 
   return (
     <>
-      <video autoPlay muted loop playsInline className="background-video">
-        <source src="/cloud30fps.mp4" type="video/mp4" />
-        Ваш браузер не поддерживает тег video.
-      </video>
       <div className="content-overlay">
         <Header />
         <main className="container mt-4">
@@ -75,13 +71,13 @@ function App() {
                   placeholder="Введите город"
                   value={cityInput}
                   onChange={(e) => setCityInput(e.target.value)}
-                  onKeyPress={handleKeyPress} // Добавляем обработчик Enter
+                  onKeyPress={handleKeyPress} 
                 />
                 <button
                   className="btn btn-secondary"
                   type="button"
-                  onClick={fetchWeather} // Вызываем функцию запроса по клику
-                  disabled={loading} // Блокируем кнопку во время загрузки
+                  onClick={fetchWeather} 
+                  disabled={loading} 
                 >
                   {loading ? "Загрузка..." : "Узнать погоду"}
                 </button>
@@ -95,16 +91,17 @@ function App() {
                 <div className="card mt-3">
                   <div className="card-body">
                     <h2 className="card-title text-center">
-                      {data.city} {data.temp} °C
+                      {data.city} {data.temp[0]} °C
                     </h2>
                     <h3 className="card-subtitle mb-2 text-muted text-center">
-                      Ощущается как: {data.feelslike} °C
+                      Feels like: {data.feelslike[0]} °C
                     </h3>
                     <h3 className="card-text text-center">
-                      Скорость ветра: {data.windspeed} м/с
+                      Wind speed: {data.windspeed[0]} м/с
                     </h3>
-                    {/* Добавьте сюда другие данные, если они есть в ответе API */}
-                    {/* Например: <p className="card-text">Описание: {data.description}</p> */}
+                    <h3 className="card-subtitle mb-2 text-muted text-center">
+                      Conditions: {data.conditions[0]}
+                    </h3>
                   </div>
                 </div>
               )}
