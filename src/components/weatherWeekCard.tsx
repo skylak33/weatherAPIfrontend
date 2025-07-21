@@ -18,9 +18,9 @@ const WeatherWeekCard: React.FC<WeatherWeekCardProps> = ({
 }) => {
     const weekDates = dates.slice(0, 7);
     const weekTemps = temps.slice(0, 7);
-    const weekFeelsLike = feelsLike.slice(0, 7);
+    {/*const weekFeelsLike = feelsLike.slice(0, 7);*/}
     const weekWindSpeeds = windSpeeds.slice(0, 7);
-    const weekConditions = conditions.slice(0, 7);
+    {/*const weekConditions = conditions.slice(0, 7);*/}
     return (
     <div className="card mt-3">
         <div className="card-body">
@@ -30,7 +30,7 @@ const WeatherWeekCard: React.FC<WeatherWeekCardProps> = ({
                     <div className="col text-center" key={idx}>
                         <div>
                             {(() => {
-                                const [year, month, day] = date.split("-");
+                                const [, month, day] = date.split("-");
                                 return `${day}.${month}`;
                             })()}
                         </div>
