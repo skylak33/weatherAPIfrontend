@@ -12,9 +12,7 @@ interface WeatherWeekCardProps {
 const WeatherWeekCard: React.FC<WeatherWeekCardProps> = ({
     dates,
     temps,
-    feelsLike,
     windSpeeds,
-    conditions,
 }) => {
     const weekDates = dates.slice(0, 7);
     const weekTemps = temps.slice(0, 7);
@@ -35,9 +33,7 @@ const WeatherWeekCard: React.FC<WeatherWeekCardProps> = ({
                             })()}
                         </div>
                         <div>{weekTemps[idx]}°C</div>
-                        {/*<div>Ощущается как: {feelsLike[idx]} °C</div>*/}
                         <div>{weekWindSpeeds[idx]}м/с</div>
-                        {/*<div>{conditions[idx]}</div>*/}
                     </div>
                 ))}
             </div>
